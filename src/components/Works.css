@@ -1,0 +1,128 @@
+/* ProjectCard styles */
+.project-card {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.project-tilt {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.project-image {
+    position: relative;
+}
+
+.project-image__img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px 10px 0 0;
+}
+
+.project-image__overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.project-image__overlay:hover {
+    opacity: 1;
+}
+
+.project-image__overlay-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.project-image__overlay-icon:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.project-image__overlay-icon-img {
+    width: 60%;
+    height: auto;
+}
+
+.project-details {
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 0 0 10px 10px;
+}
+
+.project-details__name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.project-details__description {
+    font-size: 14px;
+    color: #555555;
+}
+
+.project-tags {
+    margin-top: 10px;
+}
+
+.project-tags__tag {
+    display: inline-block;
+    font-size: 12px;
+    padding: 4px 8px;
+    margin-right: 5px;
+    border-radius: 4px;
+}
+
+/* Works styles */
+.section-subtext {
+    font-size: 16px;
+    color: #888888;
+    margin-bottom: 10px;
+}
+
+.section-headtext {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.section-description__text {
+    font-size: 16px;
+    color: #555555;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+    .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+}
