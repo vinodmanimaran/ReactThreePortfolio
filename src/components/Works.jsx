@@ -65,32 +65,31 @@ const ProjectCard = ({
               transition: "opacity 0.3s ease",
             }}
           >
-<div
-  onClick={() => window.open (source_code_link, '_blank')}
-  className="project-image__overlay-icon"
-  style={{
-    width: '40px',
-    height: '40px',
-    borderRadius: '50%',
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    cursor: 'pointer',
-    transition: 'background-color 0.3s ease',
-  }}
->
-  <img
-    src={github}
-    alt="source code"
-    className="project-image__overlay-icon-img"
-    style={{
-      width: '60%',
-      height: 'auto',
-    }}
-  />
-</div>;
-
+            <div
+              onClick={() => window.open(source_code_link, "_blank")}
+              className="project-image__overlay-icon"
+              style={{
+                width: "40px",
+                height: "40px",
+                borderRadius: "50%",
+                backgroundColor: "rgba(255, 255, 255, 0.5)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+                transition: "background-color 0.3s ease",
+              }}
+            >
+              <img
+                src={github}
+                alt="source code"
+                className="project-image__overlay-icon-img"
+                style={{
+                  width: "60%",
+                  height: "auto",
+                }}
+              />
+            </div>
           </div>
         </div>
 
@@ -186,7 +185,7 @@ const Works = () => {
         className="project-grid"
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
+          gridTemplateColumns: "1fr",
           gridGap: "20px",
         }}
       >
@@ -194,6 +193,16 @@ const Works = () => {
           <ProjectCard key={`project-${index}`} index={index} {...project} />
         ))}
       </div>
+
+      <style>
+        {`
+          @media (min-width: 576px) {
+            .project-grid {
+              gridTemplateColumns: repeat(2, 1fr);
+            }
+          }
+        `}
+      </style>
     </>
   );
 };
