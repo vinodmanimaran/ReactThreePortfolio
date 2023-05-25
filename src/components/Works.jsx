@@ -185,7 +185,7 @@ const Works = () => {
         className="project-grid"
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr",
+          gridTemplateColumns: "repeat(2, 1fr)",
           gridGap: "20px",
         }}
       >
@@ -196,9 +196,9 @@ const Works = () => {
 
       <style>
         {`
-          @media (min-width: 576px) {
+          @media (max-width: 576px) {
             .project-grid {
-              gridTemplateColumns: repeat(2, 1fr);
+              gridTemplateColumns: 1fr;
             }
           }
         `}
