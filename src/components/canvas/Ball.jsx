@@ -1,60 +1,57 @@
-import React, { useState, useRef, Suspense, useEffect } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Points, PointMaterial, Preload } from '@react-three/drei';
-import * as random from 'maath/random/dist/maath-random.esm';
+import React, { Suspense } from "react";
+import { Canvas } from "@react-three/fiber";
+import {
+  Decal,
+  Float,
+  OrbitControls,
+  Preload,
+  useTexture,
+} from "@react-three/drei";
 
-const Stars = () => {
-  const ref = useRef();
-  const [sphere] = useState(() => random.inSphere(new Float32Array(4500), { radius: 1.2 }));
+import CanvasLoader from "../Loader";
 
-  useFrame(({ clock }) => {
-    ref.current.rotation.x = Math.sin(clock.elapsedTime / 10);
-    ref.current.rotation.y = Math.sin(clock.elapsedTime / 15);
-  });
+const Ball = (props) => {
+  const [decal] = useTexture([props.imgUrl]);
 
   return (
-    <group rotation={[0, 0, Math.PI / 4]}>
-      <Points ref={ref} geometry={{ vertices: sphere }} frustumCulled={false}>
-        <PointMaterial
-          transparent
-          color="#f272c8"
-          size={0.02}
-          sizeAttenuation={true}
-          depthWrite={false}
+    <Float speed={1.75} rotationIntensity={1} floatIntensity={2}>
+      <ambientLight intensity={0.25} />
+      <directionalLight position={[0, 0, 0.05]} />
+      <mesh castShadow receiveShadow scale={2.75}>
+        <icosahedronGeometry args={[1, 1]} />
+        <meshStandardMaterial
+          color='#fff8eb'
+          polygonOffset
+          polygonOffsetFactor={-5}
+          flatShading
         />
-      </Points>
-    </group>
+        <Decal
+          position={[0, 0, 1]}
+          rotation={[2 * Math.PI, 0, 6.25]}
+          scale={1}
+          map={decal}
+          flatShading
+        />
+      </mesh>
+    </Float>
   );
 };
 
-const StarsCanvas = () => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 500px)');
-    setIsMobile(mediaQuery.matches);
-
-    const handleMediaQueryChange = (event) => {
-      setIsMobile(event.matches);
-    };
-
-    mediaQuery.addEventListener('change', handleMediaQueryChange);
-
-    return () => {
-      mediaQuery.removeEventListener('change', handleMediaQueryChange);
-    };
-  }, []);
-
+const BallCanvas = ({ icon }) => {
   return (
-    <div className="w-full h-auto absolute inset-0 z-[-1]">
-      <Canvas camera={{ position: [0, 0, 1] }} pixelRatio={isMobile ? 0.5 : 1}>
-        <Suspense fallback={null}>
-          <Stars />
-        </Suspense>
-        <Preload all />
-      </Canvas>
-    </div>
+    <Canvas
+      frameloop='demand'
+      dpr={[1, 2]}
+      gl={{ preserveDrawingBuffer: true }}
+    >
+      <Suspense fallback={<CanvasLoader />}>
+        <OrbitControls enableZoom={false} />
+        <Ball imgUrl={icon} />
+      </Suspense>
+
+      <Preload all />
+    </Canvas>
   );
 };
 
-export default StarsCanvas;
+export default BallCanvas;
