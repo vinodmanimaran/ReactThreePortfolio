@@ -67,5 +67,3 @@ Thank you for visiting my about page, and I am excited to collaborate with you o
 
 export default SectionWrapper(About, 'about');
 
-ChatGPT
-To reduce the load time of the
